@@ -29,8 +29,24 @@ class IfScreen extends StatefulWidget {
 
 // 이 화면에서만 사용되는 class
 class _IfScreenState extends State<IfScreen> {
-  int number = 0;
+  int likeCount = 0;
 
+  // 함수 : 좋아요 버튼을 눌렀을 때 실행 [Dart언어는 영어와 숫자만 가능]
+  void likeButton() {
+    setState(() {
+      likeCount = likeCount + 1;
+    });
+  }
+
+  // 함수 : 리셋 버튼
+  void resetButton(){
+      setState(() {
+        likeCount = 0;
+      });
+  }
+
+  // react에서는 return 전에 js 기능 작성
+  // dart에서는 Widget 전에 dart언어로 기능에 대하여 작성할 수 있다.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +54,7 @@ class _IfScreenState extends State<IfScreen> {
         title: Text("if문 예제"),
         backgroundColor: Colors.blue,
         leading: IconButton(
+          /*익명함수이면서 {}생략시 =>사용*/
           onPressed: () => context.go('/'),
           icon: Icon(Icons.arrow_back),
         ),
@@ -46,41 +63,43 @@ class _IfScreenState extends State<IfScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('버튼을 눌러보세요'),
-            SizedBox(height: 20),
             Text(
-              '$number',
-              style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold),
+              '하트를 눌러주세요.',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 40),
+            Text(
+              '$likeCount',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 40),
+            //IF 문을 활용하여 조건에 따라 다른 메세지 표시
+            if (likeCount == 0)
+              Text(
+                '아직 좋아요가 없습니다.😔',
+                style: TextStyle(fontSize: 18, color: Colors.grey),
+              )
+            else if (likeCount < 5)
+              Text(
+                '좋아요를 눌러주셔서 감사합니다.😚',
+                style: TextStyle(fontSize: 18, color: Colors.blue),
+              )
+            else
+              Text(
+                '인기 폭발!😀',
+                style: TextStyle(fontSize: 20, color: Colors.red),
+              ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: likeButton,
+              //child: Icon(Icons.favorite, color: Colors.pink), 스타일이 하나일 경우에는 style: 묶은 형태로 작성하지 않고 단일로 작성가능
+              child: Icon(Icons.favorite, color: Colors.pink),
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              //모든 함수에서는 한줄 코드 작성시 {}생략 가능하나 다수 코드 작성시 {} 작성
-              onPressed: () {
-                setState(() {
-                  number = number + 1;
-                });
-              },
-              child: Text('숫자 올리기'),
+              onPressed: resetButton,
+              child: Text('초기화', style: TextStyle(color: Colors.grey)),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  number = number -1;
-                });
-              },
-              child: Text('숫자 내리기'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  number = 0;
-                });
-              },
-              child: Text('숫자 초기화'),
-            ),
-
           ],
         ),
       ),
