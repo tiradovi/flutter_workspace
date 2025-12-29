@@ -32,9 +32,25 @@ class MainBody extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () => context.go("/mbti"),
+            onPressed: () => context.go("/count"),
             child: const Text(
-              'MBTI 검사하기',
+              'Count문을 통한 StatefulWidget 배우기',
+              style: TextStyle(fontSize: 18, color: Colors.green),
+            ),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () => context.go("/while"),
+            child: const Text(
+              'While 문 배우기',
+              style: TextStyle(fontSize: 18, color: Colors.green),
+            ),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () => context.go("/insta-main"),
+            child: const Text(
+              'Instagram 이동',
               style: TextStyle(fontSize: 18, color: Colors.green),
             ),
           ),

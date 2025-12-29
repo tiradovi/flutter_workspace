@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; // 구글에서 기본으로 제공하는 css 테마
 import 'package:go_router/go_router.dart';
+import 'package:project/basics/count_screen.dart';
 import 'package:project/basics/for_screen.dart';
 import 'package:project/basics/if_screen.dart';
+import 'package:project/basics/while_screen.dart';
 import 'package:project/screens/main_screen.dart';
+import 'package:project/screens/post_screen.dart';
 
-import 'basics/mbti_intro_screen.dart';
-import 'basics/mbti_question_screen.dart';
-import 'basics/mbti_result_screen.dart'; // 구글에서 기본으로 제공하는 css 테마
 
 /*
  * main.dart = 앱의 시작점
@@ -33,13 +33,14 @@ final GoRouter _router = GoRouter(
   context = App에서 각화면의 위치 주소
   state = 현재 상태
    */
+  // GoRoute 설정 후 프로젝트 재실행 필요
   routes: [
     GoRoute(path: "/", builder: (context, state) => const MainScreen()),
     GoRoute(path: "/if", builder: (context, state) => const IfScreen()),
     GoRoute(path: "/for", builder: (context, state) => const ForScreen()),
-    GoRoute(path: "/mbti", builder: (context, state) => const MbtiIntroScreen()),
-    GoRoute(path: "/mbti/question", builder: (context, state) => const MbtiQuestionScreen()),
-    GoRoute(path: "/mbti/result", builder: (context, state) => const MbtiResultScreen()),
+    GoRoute(path: "/count", builder: (context,state)=> const CountScreen()),
+    GoRoute(path: "/while", builder: (context,state)=> const WhileScreen()),
+    GoRoute(path: "/insta-main", builder: (context,state)=> const PostScreen()),
   ],
 );
 
